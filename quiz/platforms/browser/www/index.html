@@ -1,18 +1,38 @@
 <html>
 <head>
 <title>Homework 3</title>
-
+<link rel="stylesheet" href="css/onsenui.css">
+    <link rel="stylesheet" href="css/onsen-css-components.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>   
+    <script src="js/onsenui.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script>
+      var module = angular.module('app',['onsen']);
+      module.controller('AppController', function($scope) { });
+      module.controller('PageController', function($scope) {
+        ons.ready(function() {
+          // Init code here
+        });
+      });
+    </script>
 </head>
-<body>
-
+<body ng-controller="AppController">
+        
+      <ons-page ng-controller="PageController">
 <form>
+      <ons-toolbar>
+        <div class="center">Quiz</div>
+      </ons-toolbar>
+        
+        
+    
+    
+    
  
 </form>
-
     
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
-
+    </ons-page>
+   
 </body>
 </html>

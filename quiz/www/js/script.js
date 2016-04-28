@@ -8,74 +8,49 @@ var questions;
        contentType: "application/json",
        jsonpCallback: 'callback',
        success : function(data){
-            console.log(data); 
+            console.log(data.questions); 
             questions = data.questions;
             func();
         }
     })
     
 function func()
-    {
+{
     
 var form = document.getElementsByTagName("form")[0];
 questions.forEach(function(question, index){
+    var list = document.createElement("ons-list");
+    var listHeader = document.createElement("ons-list-header");
+    var bold = document.createElement("b");
+    bold.appendChild(document.createTextNode(question.title));
+    listHeader.appendChild(bold);
+    listHeader.appendChild(document.createTextNode(": " + question.text));
+    list.appendChild(listHeader);
+    
+    
+    
     if(question.type == "multiple")
     {
-        var label = document.createElement("div");
-        var title = document.createTextNode(question.title);
-        var text = document.createTextNode(question.text);
-        var bold = document.createElement("b");
-        bold.appendChild(title);
-        label.appendChild(bold);
-        label.appendChild(document.createElement("br"));
-        label.appendChild(text);
-        label.appendChild(document.createElement("br"));  
+        
         question.choices.forEach(function(choice,idx){
+            var item = document.createElement("ons-list-item");
+            item.setAttribute("modifier", "tappable");
+            var label = document.createElement("label");
+            label.setAttribute("class", "radio-button radio-button--list-item")
+            item.appendChild(label);
             var input = document.createElement("input");
             input.setAttribute("type","radio");
-            input.setAttribute("name","question"+index);
-            input.setAttribute("value",choice.text);
-            input.setAttribute("correct",choice.isCorrect ? "true" : "false");
-            label.appendChild(input);    
+            input.setAttribute("name",question.title);
+            label.appendChild(input);
+            var div = document.createElement("div");
+            div.setAttribute("class","radio-button__checkmark radio-button--list-item__checkmark");
+            label.appendChild(div);
             label.appendChild(document.createTextNode(choice.text));
-            label.appendChild(document.createElement("br"));
+            list.appendChild(item);
         });
-        form.appendChild(label);
-    }
-    else if(question.type == "truefalse")
-    {
-        var label = document.createElement("div");
-        var title = document.createTextNode(question.title);
-        var text = document.createTextNode(question.text);
-        var bold = document.createElement("b");
-        bold.appendChild(title);
-        label.appendChild(bold);
-        label.appendChild(document.createElement("br"));
-        label.appendChild(text);
-        label.appendChild(document.createElement("br"));
-        
-        var input = document.createElement("input");
-        input.setAttribute("type","radio");
-        input.setAttribute("name","question"+index);
-        input.setAttribute("value","true");
-        input.setAttribute("correct",question.answer ? "true" : "false");
-        label.appendChild(input);    
-        label.appendChild(document.createTextNode("True"));
-        label.appendChild(document.createElement("br"));
-
-        var input = document.createElement("input");
-        input.setAttribute("type","radio");
-        input.setAttribute("name","question"+index);
-        input.setAttribute("value","false");
-        input.setAttribute("correct", question.answer ? "true" : "false");
-        label.appendChild(input);    
-        label.appendChild(document.createTextNode("False"));
-        label.appendChild(document.createElement("br"));
-        
-        form.appendChild(label);
     }
     
-    
+    form.appendChild(list);
 });
 var submit = document.createElement("input");
 submit.setAttribute("type","button");
