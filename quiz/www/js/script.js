@@ -52,7 +52,7 @@ questions.forEach(function(question, index){
     }
     else if (question.type=="truefalse")
     {
-        // question.choices.forEach(function(choice,idx){
+      
         var item = document.createElement("ons-list-item");
             item.setAttribute("modifier", "tappable");
         var label = document.createElement("label");
@@ -81,47 +81,41 @@ questions.forEach(function(question, index){
             label.appendChild(div);
             label.appendChild(document.createTextNode("False"));
             list.appendChild(item);
-  //      });
+
     }
     
     form.appendChild(list);
 });
-var submit = document.createElement("ons-button");
-submit.setAttribute("type","button");
+
+var submit = document.createElement("ons-button ");
+submit.setAttribute("modifier","cta");
 submit.setAttribute("value","submit");
-submit.setAttribute("onclick","process()");
+submit.setAttribute(" ng-click","process()");
 form.appendChild(submit);
     
 
     
- (function()
-{
- 'use strict';
-  var module =  angular.module ('app', [' onsen ']);
-  $scope.navi.pushPage('detail.html');
-
-//  module.controller ( ' AppController ', function($scope, $data) {
-// $ scope.function process(){
-// var result = document.createElement("div");
-// var nodes = Array.prototype.slice.call(form.getElementsByTagName("div"),0);
-// nodes.forEach(function(group,index){
-//     var correct = false;
-//     var title = group.getElementsByTagName("b")[0];
-//     var nodelist = Array.prototype.slice.call(group.getElementsByTagName("input"),0);
-//     nodelist.forEach(function(ans,index){
-//         if(ans.getAttribute("correct") == "true" && ans.checked)
-//             correct = true;
-//     });
-//     var bold = document.createElement("b");
-//     bold.appendChild(document.createTextNode(title.innerHTML));
-//     result.appendChild(bold);
-//     result.appendChild(document.createElement("br"));
-//     result.appendChild(document.createTextNode(correct ? "Correct Answer" : "Wrong Answer"));
-//     result.appendChild(document.createElement("br"));
-//     result.appendChild(document.createElement("br"));
-// });
-//     document.getElementsByTagName("body")[0].innerHTML = result.innerHTML; 
-// }
-//     }
+    
+function process(){
+var result = document.createElement("div");
+var nodes = Array.prototype.slice.call(form.getElementsByTagName("div"),0);
+nodes.forEach(function(group,index){
+    var correct = false;
+    var title = group.getElementsByTagName("b")[0];
+    var nodelist = Array.prototype.slice.call(group.getElementsByTagName("input"),0);
+    nodelist.forEach(function(ans,index){
+        if(ans.getAttribute("correct") == "true" && ans.checked)
+            correct = true;
+    });
+    var bold = document.createElement("b");
+    bold.appendChild(document.createTextNode(title.innerHTML));
+    result.appendChild(bold);
+    result.appendChild(document.createElement("br"));
+    result.appendChild(document.createTextNode(correct ? "Correct Answer" : "Wrong Answer"));
+    result.appendChild(document.createElement("br"));
+    result.appendChild(document.createElement("br"));
 });
+    document.getElementsByTagName("body")[0].innerHTML = result.innerHTML; 
+}
+    }
 });

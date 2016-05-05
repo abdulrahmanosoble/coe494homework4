@@ -52,7 +52,7 @@ questions.forEach(function(question, index){
     }
     else if (question.type=="truefalse")
     {
-        // question.choices.forEach(function(choice,idx){
+      
         var item = document.createElement("ons-list-item");
             item.setAttribute("modifier", "tappable");
         var label = document.createElement("label");
@@ -81,15 +81,16 @@ questions.forEach(function(question, index){
             label.appendChild(div);
             label.appendChild(document.createTextNode("False"));
             list.appendChild(item);
-  //      });
+
     }
     
     form.appendChild(list);
 });
-var submit = document.createElement("ons-button");
-submit.setAttribute("type","button");
+
+var submit = document.createElement("ons-button ");
+submit.setAttribute("modifier","cta");
 submit.setAttribute("value","submit");
-submit.setAttribute("onclick","process()");
+submit.setAttribute(" ng-click","process()");
 form.appendChild(submit);
     
 
