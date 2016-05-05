@@ -1,9 +1,10 @@
 
 $(document).ready(function(){
+
 var questions;
     $.ajax({
        type: "GET",
-       url: "http://localhost:5984/quiz/426b3880858d1f9769a4c3cf09000651/?jsonp=callback",
+       url: "http://localhost:5984/quiz/fff7b5a5b81746980d06c4766f000c6c/?jsonp=callback",
        dataType : 'jsonp',
        contentType: "application/json",
        jsonpCallback: 'callback',
@@ -49,10 +50,43 @@ questions.forEach(function(question, index){
             list.appendChild(item);
         });
     }
+    else if (question.type=="truefalse")
+    {
+        // question.choices.forEach(function(choice,idx){
+        var item = document.createElement("ons-list-item");
+            item.setAttribute("modifier", "tappable");
+        var label = document.createElement("label");
+            label.setAttribute("class", "radio-button radio-button--list-item")
+            item.appendChild(label);
+        var input = document.createElement("input");
+            input.setAttribute("type","radio");
+            input.setAttribute("name",question.title);
+            label.appendChild(input);
+        var div = document.createElement("div");
+            div.setAttribute("class","radio-button__checkmark radio-button--list-item__checkmark");
+            label.appendChild(div);
+            label.appendChild(document.createTextNode("True"));
+            list.appendChild(item);
+            item = document.createElement("ons-list-item");
+            item.setAttribute("modifier", "tappable");
+            label = document.createElement("label");
+            label.setAttribute("class", "radio-button radio-button--list-item")
+            item.appendChild(label);
+            input = document.createElement("input");
+            input.setAttribute("type","radio");
+            input.setAttribute("name",question.title);
+            label.appendChild(input);
+            div = document.createElement("div");
+            div.setAttribute("class","radio-button__checkmark radio-button--list-item__checkmark");
+            label.appendChild(div);
+            label.appendChild(document.createTextNode("False"));
+            list.appendChild(item);
+  //      });
+    }
     
     form.appendChild(list);
 });
-var submit = document.createElement("input");
+var submit = document.createElement("ons-button");
 submit.setAttribute("type","button");
 submit.setAttribute("value","submit");
 submit.setAttribute("onclick","process()");
