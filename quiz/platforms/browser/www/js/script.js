@@ -52,7 +52,7 @@ questions.forEach(function(question, index){
     }
     else if (question.type=="truefalse")
     {
-      
+        // question.choices.forEach(function(choice,idx){
         var item = document.createElement("ons-list-item");
             item.setAttribute("modifier", "tappable");
         var label = document.createElement("label");
@@ -81,16 +81,15 @@ questions.forEach(function(question, index){
             label.appendChild(div);
             label.appendChild(document.createTextNode("False"));
             list.appendChild(item);
-
+  //      });
     }
     
     form.appendChild(list);
 });
-
-var submit = document.createElement("ons-button ");
-submit.setAttribute("modifier","cta");
+var submit = document.createElement("ons-button");
+submit.setAttribute("type","button");
 submit.setAttribute("value","submit");
-submit.setAttribute(" ng-click","process()");
+submit.setAttribute("onclick","process()");
 form.appendChild(submit);
     
 
@@ -104,7 +103,7 @@ nodes.forEach(function(group,index){
     var title = group.getElementsByTagName("b")[0];
     var nodelist = Array.prototype.slice.call(group.getElementsByTagName("input"),0);
     nodelist.forEach(function(ans,index){
-        if(ans.getAttribute("correct") == "true" && ans.checked)
+        if(ans.getAttribute("isCorrect") == "true" && ans.checked)
             correct = true;
     });
     var bold = document.createElement("b");
